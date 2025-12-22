@@ -1,0 +1,104 @@
+* {
+    /* Renk Tanımlamaları */
+    bg:             #1a1b26;    /* Derin Lacivert Arka Plan */
+    fg:             #c0caf5;    /* Açık Mavi/Gri Metin */
+    accent:         #7aa2f7;    /* Parlak Mavi (Seçili öğe) */
+    inactive-fg:    #565f89;    /* Pasif sekmeler için belirgin gri */
+    prompt-bg:      #bb9af7;    /* Mor Giriş Alanı */
+    
+    background-color:   transparent;
+    text-color:         @fg;
+}
+
+configuration {
+    modi: "run,drun,window";
+    icon-theme: "Oranchelo";
+    show-icons: true;
+    terminal: "kitty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "   Apps ";
+    display-run: "   Run ";
+    display-window: " 󰕰  Window ";
+    sidebar-mode: true;
+}
+
+window {
+    width:            450px;
+    height:           500px;
+    border:           3px;
+    border-color:     @accent;
+    border-radius:    12px;
+    background-color: @bg;
+    padding:          20px;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [inputbar, listview, sidebar]; /* Sidebar'ı en alta sabitledik */
+}
+
+inputbar {
+    children:         [prompt, entry];
+    background-color: @bg;
+    border-radius:    5px;
+    padding:          2px;
+    margin:           0px 0px 10px 0px;
+}
+
+prompt {
+    background-color: @prompt-bg;
+    padding:          6px;
+    text-color:       @bg;
+    border-radius:    3px;
+}
+
+entry {
+    padding:          6px;
+    margin:           0px 0px 0px 10px;
+    text-color:       @fg;
+}
+
+listview {
+    border:           0px;
+    padding:          10px 0px;
+    columns:          1;
+    lines:            6;
+}
+
+/* Liste öğeleri */
+element {
+    padding:          8px;
+    border-radius:    5px;
+    text-color:       @fg;
+}
+
+element-icon {
+    size:             24px;
+    margin:           0 10px 0 0;
+}
+
+element selected {
+    background-color: @accent;
+    text-color:       @bg;
+}
+
+/* ALT BAR (SIDEBAR) AYARLARI - Görünürlük sorunu burada çözüldü */
+sidebar {
+    border:       2px 0px 0px;
+    border-color: @inactive-fg;
+    margin:       10px 0px 0px 0px;
+}
+
+button {
+    padding:    10px;
+    text-color: @inactive-fg; /* Pasif sekmeler artık görünür gri tonda */
+}
+
+button selected {
+    background-color: @accent;
+    text-color:       @bg;     /* Aktif sekme parlak mavi arka plan üzerine lacivert metin */
+    border-radius:    5px;
+}

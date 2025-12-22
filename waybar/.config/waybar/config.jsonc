@@ -1,0 +1,79 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 28,
+    "spacing": 3,
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray","backlight", "pulseaudio","bluetooth", "network", "battery"],
+
+    "hyprland/workspaces": {
+        "disable-scroll": false,
+	"format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "active": "",
+            "default": ""
+        },
+        "sort-by-number": true
+    },
+
+    "clock": {
+        "format": "{:%d %B %Y | %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"]
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": {
+          "default": ["", "", ""]
+        },
+        "on-click": "sh -c '$TERMINAL --class float_tui -e ncpamixer'",        
+	"on-click-right": "pavucontrol" // Sağ tıkla görsel arayüzü de açabilirsin
+    },
+
+    "bluetooth": {
+        "format": "",
+        "format-disabled": "󰂲", 
+        "format-connected": "󰂱",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "sh -c '$TERMINAL --class float_tui -e bluetui'"    
+    },
+    
+    "network": {
+        "format-wifi": "",
+        "format-ethernet": "󰈀",
+        "tooltip-format": "{essid}",
+        "on-click": "sh -c '$TERMINAL --class float_tui -e impala'"
+    },
+
+    "battery": {
+        "states": {
+           "warning": 30,
+           "critical": 15
+    },
+        "format": "{icon} {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+    
+    // Sol tıklama ile Rofi menüsünü açar
+        "on-click": "~/.config/hypr/scripts/power_menu.sh",
+    
+    // Sağ tıklama ile mevcut durumu bildirim olarak gönderir (isteğe bağlı)
+        "on-click-right": "notify-send 'Aktif Profil' \"$(powerprofilesctl get)\"",
+    
+        "tooltip": true,
+        "tooltip-format": "Kalan Süre: {time}"
+    },
+
+    "tray": {
+        "spacing": 10
+    }
+}

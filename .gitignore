@@ -1,0 +1,14 @@
+# Neovim swap ve backup dosyaları
+*.swp
+*.swo
+undo/
+
+# Gereksiz loglar
+*.log
+
+# Cache klasörleri (genellikle yedeklenmez)
+.cache/
+yazi/cache/
+
+# Hassas dosyalar (varsa)
+.env

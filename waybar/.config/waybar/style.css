@@ -1,0 +1,91 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    /* Koyu Lacivert Tonu ve Transparanlık */
+    background-color: black;    
+    color: white;
+    transition-property: background-color;
+    transition-duration: 1.5s;
+}
+
+/* Workspace Bloğu - Arka plan ve çerçeve tamamen kaldırıldı */
+#workspaces {
+    background-color: transparent;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+}
+
+/* Tüm Workspace Noktaları (Pasif Hal) */
+#workspaces button {
+    all: unset;
+    color: rgba(122, 162, 247, 0.3); /* Sönük Mavi Nokta */
+    font-size: 16px;                 /* Nokta büyüklüğü */
+    padding: 0 4px;
+    margin: 0 2px;
+    transition: none;                /* Animasyon kapalı */
+}
+
+/* Sadece nokta simgesi göstermek için (Eğer format kısmında isim yazıyorsa bunu kullanabilirsin) */
+#workspaces button {
+    font-family: "JetBrainsMono Nerd Font";
+}
+
+
+/* Aktif Workspace Noktası */
+#workspaces button.active {
+    color: #7aa2f7;                  /* Parlak Tokyo Mavi */
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0 4px;
+}
+
+/* Hover ve Diğer Efektlerin Temizlenmesi */
+#workspaces button:hover {
+    background: transparent;
+    color: #bb9af7;
+}
+
+#pulseaudio,
+#bluetooth,
+#network,
+#backlight,
+#battery {
+    padding: 0 10px;
+    color: #7aa2f7; /* Noktalardaki parlak mavi renk */
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+#clock {
+    color: #c0caf5; /* Daha açık, beyaza yakın mavi/gri metin */
+    font-weight: bold;
+}
+
+#tray {
+    padding: 0 8px;
+    color: #d1d1d1;
+}
+
+/* Pil kritik seviyede veya şarjda iken */
+#battery.critical:not(.charging) {
+    color: #f7768e; /* Tokyo Kırmızı */
+}
+
+#battery.charging {
+    color: #9ece6a; /* Tokyo Yeşil */
+}
+
+@keyframes blink {
+    to {
+        background-color: rgba(243, 139, 168, 0.5);
+        color: #ffffff;
+    }
+}
