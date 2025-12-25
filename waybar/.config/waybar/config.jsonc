@@ -35,7 +35,7 @@
           "default": ["", "", ""]
         },
         "on-click": "sh -c '$TERMINAL --class float_tui -e ncpamixer'",        
-	"on-click-right": "pavucontrol" // Sağ tıkla görsel arayüzü de açabilirsin
+	"on-click-right": "pavucontrol"
     },
 
     "bluetooth": {
@@ -49,12 +49,13 @@
     },
     
     "network": {
-        "format-wifi": "",
-        "format-ethernet": "󰈀",
-        "tooltip-format": "{essid}",
-        "on-click": "sh -c '$TERMINAL --class float_tui -e impala'"
+    	"format-wifi": "",
+    	"format-ethernet": "󰈀",
+    	"format-disconnected": "󰈂", 
+    	"tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+	"on-click": "sh -c '$TERMINAL --class float_tui -e impala'"
     },
-
+    
     "battery": {
         "states": {
            "warning": 30,
@@ -62,13 +63,8 @@
     },
         "format": "{icon} {capacity}%",
         "format-icons": ["", "", "", "", ""],
-    
-    // Sol tıklama ile Rofi menüsünü açar
         "on-click": "~/.config/hypr/scripts/power_menu.sh",
-    
-    // Sağ tıklama ile mevcut durumu bildirim olarak gönderir (isteğe bağlı)
         "on-click-right": "notify-send 'Aktif Profil' \"$(powerprofilesctl get)\"",
-    
         "tooltip": true,
         "tooltip-format": "Kalan Süre: {time}"
     },
