@@ -1,83 +1,85 @@
+/* ==========================================================================
+   Rofi TokyoNight Teması - Melih için Düzenlendi
+   ========================================================================== */
+
+configuration {
+    modi:                       "drun,run";
+    show-icons:                 true;
+    display-drun:               "   Apps ";
+    display-run:                "   Run ";
+    drun-display-format:        "{name}";
+    terminal:                   "kitty";
+    location:                   0;
+    disable-history:            false;
+    hide-scrollbar:             true;
+    sidebar-mode:               true;
+}
+
+@theme "/dev/null"
+
 * {
-    /* Renk Tanımlamaları */
-    bg:             #1a1b26;    /* Derin Lacivert Arka Plan */
-    fg:             #c0caf5;    /* Açık Mavi/Gri Metin */
-    accent:         #7aa2f7;    /* Parlak Mavi (Seçili öğe) */
-    inactive-fg:    #565f89;    /* Pasif sekmeler için belirgin gri */
-    prompt-bg:      #bb9af7;    /* Mor Giriş Alanı */
+    /* TokyoNight Renk Paleti */
+    bg:             #1a1b26;
+    bg-alt:         #24283b;
+    fg:             #c0caf5;
+    accent:         #7aa2f7;
+    inactive-fg:    #565f89;
+    prompt-bg:      #bb9af7;
     
     background-color:   transparent;
     text-color:         @fg;
 }
 
-configuration {
-    modi: "run,drun,window";
-    icon-theme: "Oranchelo";
-    show-icons: true;
-    terminal: "kitty";
-    drun-display-format: "{icon} {name}";
-    location: 0;
-    disable-history: false;
-    hide-scrollbar: true;
-    display-drun: "   Apps ";
-    display-run: "   Run ";
-    display-window: " 󰕰  Window ";
-    sidebar-mode: true;
-}
-
 window {
     width:            450px;
     height:           500px;
-    border:           3px;
+    border:           2px;
     border-color:     @accent;
-    border-radius:    12px;
+    border-radius:    15px;
     background-color: @bg;
     padding:          20px;
 }
 
 mainbox {
     background-color: transparent;
-    children: [inputbar, listview, sidebar]; /* Sidebar'ı en alta sabitledik */
+    children:         [ inputbar, listview, sidebar ];
 }
 
 inputbar {
-    children:         [prompt, entry];
-    background-color: @bg;
-    border-radius:    5px;
-    padding:          2px;
-    margin:           0px 0px 10px 0px;
+    children:         [ prompt, entry ];
+    background-color: @bg-alt;
+    border-radius:    8px;
+    padding:          8px;
+    margin:           0px 0px 15px 0px;
 }
 
 prompt {
     background-color: @prompt-bg;
-    padding:          6px;
+    padding:          6px 12px;
     text-color:       @bg;
-    border-radius:    3px;
+    border-radius:    6px;
 }
 
 entry {
     padding:          6px;
     margin:           0px 0px 0px 10px;
     text-color:       @fg;
+    placeholder:      "Arama yapın...";
 }
 
 listview {
     border:           0px;
-    padding:          10px 0px;
+    padding:          5px 0px;
     columns:          1;
-    lines:            6;
+    lines:            10;
+    spacing:          5px;
+    fixed-height:     true;
 }
 
-/* Liste öğeleri */
 element {
-    padding:          8px;
-    border-radius:    5px;
+    padding:          10px;
+    border-radius:    8px;
     text-color:       @fg;
-}
-
-element-icon {
-    size:             24px;
-    margin:           0 10px 0 0;
 }
 
 element selected {
@@ -85,20 +87,24 @@ element selected {
     text-color:       @bg;
 }
 
-/* ALT BAR (SIDEBAR) AYARLARI - Görünürlük sorunu burada çözüldü */
+element-icon {
+    size:             28px;
+    margin:           0 12px 0 0;
+}
+
 sidebar {
-    border:       2px 0px 0px;
-    border-color: @inactive-fg;
-    margin:       10px 0px 0px 0px;
+    border:           2px 0px 0px;
+    border-color:     @inactive-fg;
+    margin:           10px 0px 0px 0px;
 }
 
 button {
-    padding:    10px;
-    text-color: @inactive-fg; /* Pasif sekmeler artık görünür gri tonda */
+    padding:          10px;
+    text-color:       @inactive-fg;
 }
 
 button selected {
-    background-color: @accent;
-    text-color:       @bg;     /* Aktif sekme parlak mavi arka plan üzerine lacivert metin */
-    border-radius:    5px;
+    background-color: @bg-alt;
+    text-color:       @accent;
+    border-radius:    8px;
 }
