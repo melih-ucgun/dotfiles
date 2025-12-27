@@ -132,3 +132,6 @@ alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 export SUDO_EDITOR=nvim
 
 alias snvim='sudo -E nvim'
+
+alias lg='lazygit'
+export PATH=$PATH:$HOME/go/bin
