@@ -125,7 +125,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Sadece TTY1'de ve henüz grafik arayüz yoksa Hyprland'i başlat
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
-  exec Hyprland
+  exec start-hyprland
 fi
 
 alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

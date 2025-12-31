@@ -1,91 +1,136 @@
+/* Tokyonight Renk Paleti */
+@define-color bg rgba(26, 27, 38, 0.8);
+@define-color bg_hover rgba(36, 38, 56, 1);
+@define-color fg #c0caf5;
+@define-color blue #7aa2f7;
+@define-color magenta #bb9af7;
+@define-color red #f7768e;
+@define-color green #9ece6a;
+@define-color border_color rgba(122, 162, 247, 0.2);
+
 * {
-    font-family: "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    border: none;
-    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    min-height: 0;
+    transition: none;
 }
 
 window#waybar {
-    /* Koyu Lacivert Tonu ve Transparanlık */
-    background-color: black;    
-    color: white;
-    transition-property: background-color;
-    transition-duration: 1.5s;
-}
-
-/* Workspace Bloğu - Arka plan ve çerçeve tamamen kaldırıldı */
-#workspaces {
     background-color: transparent;
-    margin: 0px;
-    padding: 0px;
-    border: none;
 }
 
-/* Tüm Workspace Noktaları (Pasif Hal) */
-#workspaces button {
-    all: unset;
-    color: rgba(122, 162, 247, 0.3); /* Sönük Mavi Nokta */
-    font-size: 16px;                 /* Nokta büyüklüğü */
-    padding: 0 4px;
-    margin: 0 2px;
-    transition: none;                /* Animasyon kapalı */
+/* --- TOOLTIP TASARIMI --- */
+tooltip {
+    background: rgba(26, 27, 38, 0.95);
+    border: 1px solid @magenta;
+    border-radius: 10px;
+}
+tooltip label {
+    color: @fg;
+    padding: 4px;
 }
 
-/* Sadece nokta simgesi göstermek için (Eğer format kısmında isim yazıyorsa bunu kullanabilirsin) */
-#workspaces button {
-    font-family: "JetBrainsMono Nerd Font";
-}
-
-
-/* Aktif Workspace Noktası */
-#workspaces button.active {
-    color: #7aa2f7;                  /* Parlak Tokyo Mavi */
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    padding: 0 4px;
-}
-
-/* Hover ve Diğer Efektlerin Temizlenmesi */
-#workspaces button:hover {
-    background: transparent;
-    color: #bb9af7;
-}
-
+/* --- ORTAK ADACIK STİLİ --- */
+#workspaces,
+#mpris,
+#window,
+#clock,
+#custom-updates,
+#network-speed,
+#cpu,
+#memory,
+#pulseaudio-microphone,
 #pulseaudio,
-#bluetooth,
+#backlight,
+#network,
+#battery,
+#tray {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 10px;
+    border: 1px solid @border_color;
+    padding: 2px 10px;
+    margin: 2px 0px;
+    box-shadow: none;
+}
+
+/* --- MPRIS MANTIĞI --- */
+#mpris.playing { color: @magenta; }
+#mpris.paused { color: rgba(192, 202, 245, 0.6); font-style: italic; }
+#mpris.stopped { color: @red; }
+
+/* --- GÜNCELLEME MODÜLÜ RENKLERİ --- */
+
+/* Varsayılan veya Güncelleme Varken (Sarı/Turuncu) */
+#custom-updates {
+    color: #e0af68;
+}
+
+/* Sistem Güncel İse (Yeşil Tik) */
+#custom-updates.updated {
+    color: @green;
+}
+
+/* Güncelleme Bekliyor İse (Yine de garanti olsun diye pending sınıfı) */
+#custom-updates.pending {
+    color: #e0af68;
+}
+
+/* --- ORTALAMA AYARI --- */
 #network,
 #backlight,
-#battery {
-    padding: 0 10px;
-    color: #7aa2f7; /* Noktalardaki parlak mavi renk */
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
+#pulseaudio,
+#pulseaudio-microphone {
+    padding: 2px 14px;
 }
 
-#clock {
-    color: #c0caf5; /* Daha açık, beyaza yakın mavi/gri metin */
-    font-weight: bold;
+/* --- HOVER EFEKTLERİ --- */
+#workspaces:hover,
+#mpris:hover,
+#window:hover,
+#clock:hover,
+#custom-updates:hover,
+#network-speed:hover,
+#cpu:hover,
+#memory:hover,
+#pulseaudio-microphone:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#network:hover,
+#battery:hover,
+#tray:hover {
+    background-color: @bg_hover;
+    border-color: @magenta;
+    color: #ffffff;
 }
 
-#tray {
-    padding: 0 8px;
-    color: #d1d1d1;
+/* --- ÖZEL MODÜL AYARLARI --- */
+#workspaces button {
+    color: rgba(122, 162, 247, 0.4);
+    padding: 0 4px;
+}
+#workspaces button.active {
+    color: @blue;
 }
 
-/* Pil kritik seviyede veya şarjda iken */
-#battery.critical:not(.charging) {
-    color: #f7768e; /* Tokyo Kırmızı */
-}
+#clock { font-weight: 800; }
 
-#battery.charging {
-    color: #9ece6a; /* Tokyo Yeşil */
-}
+#window { color: @magenta; }
 
-@keyframes blink {
-    to {
-        background-color: rgba(243, 139, 168, 0.5);
-        color: #ffffff;
-    }
-}
+/* Renkler */
+#network-speed { color: @fg; }
+#cpu { color: @blue; }
+#memory { color: @magenta; }
+#pulseaudio-microphone { color: @red; }
+#pulseaudio { color: @blue; }
+#backlight { color: #ff9e64; }
+#network { color: @blue; }
+
+/* Pil */
+#battery.charging { color: #9ece6a; }
+#battery.warning { color: #e0af68; }
+#battery.critical { color: #f7768e; background-color: rgba(247, 118, 142, 0.2); }
+
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }

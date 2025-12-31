@@ -1,74 +1,155 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 28,
-    "spacing": 3,
-    "modules-left": ["hyprland/workspaces"],
+    "height": 30,
+    "margin-top": 5,
+    "margin-left": 10,
+    "margin-right": 10,
+    "spacing": 6,
+
+    "modules-left": ["hyprland/workspaces", "hyprland/window","tray", "mpris"],
     "modules-center": ["clock"],
-    "modules-right": ["tray","backlight", "pulseaudio","bluetooth", "network", "battery"],
+    "modules-right": [
+        "custom/updates",      // Akıllı Güncelleme Modülü
+        "network#speed",
+        "cpu",
+        "memory",
+        "pulseaudio#microphone",
+        "pulseaudio",
+        "backlight",
+        "network",
+        "battery"
+    ],
 
     "hyprland/workspaces": {
-        "disable-scroll": false,
-	"format": "{icon}",
-        "on-click": "activate",
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{icon}",
         "format-icons": {
-            "active": "",
-            "default": ""
-        },
-        "sort-by-number": true 
+            "active": "󰮯",
+            "default": "󰊠"
+        }
     },
 
+    "hyprland/window": {
+        "format": "  {}",
+        "max-length": 50,
+        "separate-outputs": true,
+        "rewrite": {
+            "(.*) - Mozilla Firefox": "Firefox 󰈹",
+            "(.*) - Google Chrome": "Chrome ",
+            "(.*) - Brave": "Brave 🦁",
+            "(.*) - Chromium": "Chromium ",
+            "(.*) - Visual Studio Code": "VS Code 󰨞",
+            "(.*) - Sublime Text": "Sublime ",
+            "(.*) - Kitty": "Terminal ",
+            "(.*) - Alacritty": "Terminal ",
+            "(.*) - Discord": "Discord 󰙯",
+            "(.*) - Telegram": "Telegram ",
+            "(.*) - WhatsApp": "WhatsApp ",
+            "(.*) - Spotify": "Spotify ",
+            "(.*) - Steam": "Steam ",
+            "(.*) - VLC media player": "VLC 󰕼",
+            "(.*) - mpv": "MPV ",
+            "(.*) - Thunar": "Dosyalar ",
+            "(.*) - Dolphin": "Dosyalar ",
+            "(.*) - Nemo": "Dosyalar ",
+            "(.*) - LibreOffice (.*)": "Ofis 󰏫",
+            "(.*) - Obsidian": "Obsidian 󰠮",
+            "^$": "Masaüstü" 
+        }
+    },
+
+    "mpris": {
+        "format": "{player_icon}  {artist} - {title}  {status_icon}",
+        "format-paused": "{status_icon}  {artist} - {title}", 
+        "format-stopped": "󰝛",
+        "player-icons": {
+            "default": "󰎆",
+            "spotify": "",
+            "firefox": "󰈹",
+            "chromium": "",
+            "google-chrome": "",
+            "brave": "🦁",
+            "youtube": "",
+            "youtube-music": "",
+            "mpv": "",
+            "vlc": "󰕼"
+        },
+        "status-icons": {
+            "playing": "▶",
+            "paused": "⏸"
+        },
+        "max-length": 45
+    },
+    
     "clock": {
-        "format": "{:%d %B %Y | %H:%M}",
+        "format": "  {:%H:%M}",
+        "format-alt": "  {:%d %B %Y}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
+    // --- AKILLI GÜNCELLEME MODÜLÜ ---
+    "custom/updates": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "count=$(checkupdates 2>/dev/null | wc -l); if [ \"$count\" -eq \"0\" ]; then echo '{\"text\":\"\", \"tooltip\":\"Up to date\", \"class\":\"updated\"}'; else echo \"{\\\"text\\\":\\\"󰚰 $count\\\", \\\"tooltip\\\":\\\"$count Waiting for update\\\", \\\"class\\\":\\\"pending\\\"}\"; fi",
+        "interval": 3600
+    },
+
+    "network#speed": {
+        "interval": 1,
+        "format": "{bandwidthDownBytes}  {bandwidthUpBytes} ",
+        "format-disconnected": "Offline",
+        "tooltip": false
+    },
+
+    "memory": {
+        "format": " {percentage}%",
+        "interval": 5,
+        "tooltip-format": "RAM Usage: {used:0.1f}GB / {total:0.1f}GB"
+    },
+
+    "cpu": { 
+        "format": "󰻠 {usage}%", 
+        "interval": 5 
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "",
+        "format-source-muted": "",
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+        "tooltip-format": "Mikrofon: {source_volume}%"
+    },
+
     "backlight": {
-        "format": "{icon} {percent}%",
-        "format-icons": ["󰃞", "󰃟", "󰃠"]
+        "format": "{icon}",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "tooltip-format": "{percent}%"
     },
 
     "pulseaudio": {
-        "format": "{icon} {volume}%",
+        "format": "{icon}",
         "format-muted": "󰝟",
-        "format-icons": {
-          "default": ["", "", ""]
-        },
-        "on-click": "sh -c '$TERMINAL --class float_tui -e ncpamixer'",        
-	"on-click-right": "pavucontrol"
-    },
-
-    "bluetooth": {
-        "format": "",
-        "format-disabled": "󰂲", 
-        "format-connected": "󰂱",
-        "tooltip-format": "{controller_alias}\t{controller_address}",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "sh -c '$TERMINAL --class float_tui -e bluetui'"    
+        "format-icons": { "default": ["", "", ""] },
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "tooltip-format": "Ses: {volume}%"
     },
     
     "network": {
     	"format-wifi": "",
     	"format-ethernet": "󰈀",
-    	"format-disconnected": "󰈂", 
-    	"tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+    	"format-disconnected": "󰈂",
+        "tooltip-format": "{ifname}: {ipaddr}"
     },
     
     "battery": {
-        "states": {
-           "warning": 30,
-           "critical": 15
-    },
         "format": "{icon} {capacity}%",
-        "format-icons": ["", "", "", "", ""],
-        "on-click": "~/.config/hypr/scripts/power_menu.sh",
-        "on-click-right": "notify-send 'Aktif Profil' \"$(powerprofilesctl get)\"",
-        "tooltip": true,
-        "tooltip-format": "Kalan Süre: {time}"
+        "format-icons": ["", "", "", "", ""]
     },
 
-    "tray": {
-        "spacing": 10
-    }
+    "tray": { "spacing": 8 }
 }
