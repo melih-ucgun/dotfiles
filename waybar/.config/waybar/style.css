@@ -108,7 +108,7 @@ tooltip label {
 /* --- ÖZEL MODÜL AYARLARI --- */
 #workspaces button {
     color: rgba(122, 162, 247, 0.4);
-    padding: 0 4px;
+    padding: 0 3px;
 }
 #workspaces button.active {
     color: @blue;

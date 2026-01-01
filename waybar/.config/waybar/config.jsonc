@@ -51,10 +51,10 @@
             "(.*) - Steam": "Steam ",
             "(.*) - VLC media player": "VLC 󰕼",
             "(.*) - mpv": "MPV ",
-            "(.*) - Thunar": "Dosyalar ",
-            "(.*) - Dolphin": "Dosyalar ",
-            "(.*) - Nemo": "Dosyalar ",
-            "(.*) - LibreOffice (.*)": "Ofis 󰏫",
+            "(.*) - Thunar": "Files ",
+            "(.*) - Dolphin": "Files ",
+            "(.*) - Nemo": "Files ",
+            "(.*) - LibreOffice (.*)": "LibreOffice 󰏫",
             "(.*) - Obsidian": "Obsidian 󰠮",
             "^$": "Masaüstü" 
         }
@@ -121,7 +121,7 @@
         "format-source-muted": "",
         "on-click": "pavucontrol",
         "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-        "tooltip-format": "Mikrofon: {source_volume}%"
+        "tooltip-format": "Microphone: {source_volume}%"
     },
 
     "backlight": {
