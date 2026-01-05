@@ -6,6 +6,7 @@
 @define-color magenta #bb9af7;
 @define-color red #f7768e;
 @define-color green #9ece6a;
+@define-color orange #ff9e64;
 @define-color border_color rgba(122, 162, 247, 0.2);
 
 * {
@@ -13,7 +14,7 @@
     font-size: 13px;
     font-weight: bold;
     min-height: 0;
-    transition: none;
+    transition: 0.2s;
 }
 
 window#waybar {
@@ -44,45 +45,42 @@ tooltip label {
 #pulseaudio,
 #backlight,
 #network,
+#bluetooth,
 #battery,
 #tray {
     background-color: @bg;
     color: @fg;
     border-radius: 10px;
     border: 1px solid @border_color;
-    padding: 2px 10px;
-    margin: 2px 0px;
-    box-shadow: none;
+    margin: 2px 1px; /* Yatay margin 1px'e düşürüldü */
 }
 
-/* --- MPRIS MANTIĞI --- */
-#mpris.playing { color: @magenta; }
-#mpris.paused { color: rgba(192, 202, 245, 0.6); font-style: italic; }
-#mpris.stopped { color: @red; }
-
-/* --- GÜNCELLEME MODÜLÜ RENKLERİ --- */
-
-/* Varsayılan veya Güncelleme Varken (Sarı/Turuncu) */
-#custom-updates {
-    color: #e0af68;
-}
-
-/* Sistem Güncel İse (Yeşil Tik) */
-#custom-updates.updated {
-    color: @green;
-}
-
-/* Güncelleme Bekliyor İse (Yine de garanti olsun diye pending sınıfı) */
-#custom-updates.pending {
-    color: #e0af68;
-}
-
-/* --- ORTALAMA AYARI --- */
-#network,
-#backlight,
+/* --- SADECE SİMGE OLANLAR (Ortalama) --- */
 #pulseaudio,
-#pulseaudio-microphone {
-    padding: 2px 14px;
+#backlight,
+#network,
+#bluetooth {
+    min-width: 34px;
+    padding: 0;
+    margin: 2px 1px; /* Daha sıkı bir görüntü için */
+}
+
+/* --- İNTERNET HIZ PANELİ --- */
+#network-speed {
+    min-width: 120px; 
+    padding: 2px 16px;
+    color: @fg;
+}
+
+/* --- DİĞER METİNLİ MODÜLLER --- */
+#custom-updates,
+#cpu,
+#memory,
+#pulseaudio-microphone,
+#battery,
+#clock,
+#window {
+    padding: 2px 12px;
 }
 
 /* --- HOVER EFEKTLERİ --- */
@@ -98,6 +96,7 @@ tooltip label {
 #pulseaudio:hover,
 #backlight:hover,
 #network:hover,
+#bluetooth:hover,
 #battery:hover,
 #tray:hover {
     background-color: @bg_hover;
@@ -105,32 +104,23 @@ tooltip label {
     color: #ffffff;
 }
 
-/* --- ÖZEL MODÜL AYARLARI --- */
+/* --- RENKLER --- */
 #workspaces button {
     color: rgba(122, 162, 247, 0.4);
-    padding: 0 3px;
+    padding: 0 4px;
 }
-#workspaces button.active {
-    color: @blue;
-}
-
-#clock { font-weight: 800; }
-
+#workspaces button.active { color: @blue; }
 #window { color: @magenta; }
-
-/* Renkler */
-#network-speed { color: @fg; }
+#custom-updates { color: #e0af68; }
+#custom-updates.updated { color: @green; }
 #cpu { color: @blue; }
 #memory { color: @magenta; }
 #pulseaudio-microphone { color: @red; }
 #pulseaudio { color: @blue; }
-#backlight { color: #ff9e64; }
+#backlight { color: @orange; }
 #network { color: @blue; }
-
-/* Pil */
-#battery.charging { color: #9ece6a; }
+#bluetooth { color: @blue; }
+#bluetooth.connected { color: @magenta; }
+#battery.charging { color: @green; }
 #battery.warning { color: #e0af68; }
-#battery.critical { color: #f7768e; background-color: rgba(247, 118, 142, 0.2); }
-
-#tray > .passive { -gtk-icon-effect: dim; }
-#tray > .needs-attention { -gtk-icon-effect: highlight; }
+#battery.critical { color: @red; background-color: rgba(247, 118, 142, 0.1); }
