@@ -34,3 +34,5 @@ alias lg='lazygit'
 export PATH=$PATH:$HOME/go/bin
 
 export MONARCH_KEY="AGE-SECRET-KEY-1X7Y0XGMVRSUMAUHQQ3Q5T2NZV5KLG96GLSAZLPA65UF69SWTXZCQW4SQ2J"
+
+eval "$(mise activate zsh)"
