@@ -1,0 +1,8 @@
+# Tema ve Görünüm
+theme = tokyonight
+background-opacity = 0.9
+font-family = "JetBrainsMono Nerd Font"
+font-size = 11
+
+# Pencere Ayarları
+window-decoration = false
